@@ -1,68 +1,114 @@
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>查男友手机</title>
+    <title>查手机 - 仿iOS首页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        * { box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-            background-color: #f5f5f5;
             margin: 0;
-            padding: 40px 0 0 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f4f4f4;
+            overflow: hidden;
+        }
+        .page-container {
+            display: flex;
+            width: 200vw;
+            height: 100vh;
+            transition: transform 0.3s ease-in-out;
+        }
+        .screen {
+            width: 100vw;
+            padding: 40px 20px 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 35px 30px;
+            justify-items: center;
+        }
+        .icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-        h1 {
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
-        .app-grid {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
             justify-content: center;
+            text-decoration: none;
+            color: black;
         }
-        .app-icon {
-            background-color: white;
-            border-radius: 16px;
-            padding: 18px 20px 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            text-align: center;
-            width: 80px;
-            transition: transform 0.2s ease;
-        }
-        .app-icon:hover {
-            transform: scale(1.05);
-        }
-        .app-icon img {
+        .icon img {
             width: 40px;
             height: 40px;
         }
-        .app-icon p {
-            margin: 10px 0 0;
-            font-size: 14px;
-            color: #333;
+        .icon span {
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        .nav-dots {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #bbb;
+        }
+        .dot.active {
+            background-color: #333;
         }
     </style>
 </head>
-<body>
-    <h1>📱 查男友手机</h1>
-    <div class="app-grid">
-        <a class="app-icon" href="wechat.html">
-            <img src="https://img.icons8.com/ios-filled/50/000000/weixing.png"/>
-            <p>微信</p>
-        </a>
-        <a class="app-icon" href="note.html">
-            <img src="https://img.icons8.com/ios-filled/50/000000/task.png"/>
-            <p>备忘录</p>
-        </a>
-        <a class="app-icon" href="browser.html">
-            <img src="https://img.icons8.com/ios-filled/50/000000/internet.png"/>
-            <p>浏览器</p>
-        </a>
+<body ontouchstart="start(event)" ontouchmove="move(event)" ontouchend="end(event)">
+<div class="page-container" id="pages">
+    <div class="screen">
+        <a href="#" class="icon"><img src="https://img.icons8.com/ios-filled/50/weixing.png"/><span>微信</span></a>
+        <a href="#" class="icon"><img src="https://img.icons8.com/ios-filled/50/task.png"/><span>备忘录</span></a>
+        <a href="#" class="icon"><img src="https://img.icons8.com/ios-filled/50/internet.png"/><span>浏览器</span></a>
+        <a href="#" class="icon"><img src="https://img.icons8.com/ios-filled/50/meal.png"/><span>外卖</span></a>
+        <a href="#" class="icon"><img src="https://img.icons8.com/ios-filled/50/shopping-cart.png"/><span>购物</span></a>
     </div>
+    <div class="screen">
+        <a href="#" class="icon"><img src="https://img.icons8.com/ios-filled/50/topic.png"/><span>微博</span></a>
+        <a href="#" class="icon"><img src="https://img.icons8.com/ios-filled/50/twitterx--v2.png"/><span>X</span></a>
+        <a href="#" class="icon"><img src="https://img.icons8.com/ios-filled/50/apple-music.png"/><span>音乐</span></a>
+        <a href="#" class="icon"><img src="https://img.icons8.com/ios-filled/50/bank.png"/><span>银行</span></a>
+        <a href="#" class="icon"><img src="https://img.icons8.com/ios-filled/50/diary.png"/><span>日记</span></a>
+    </div>
+</div>
+<div class="nav-dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+</div>
+<script>
+let startX = 0;
+let currentPage = 0;
+function start(e) {
+    startX = e.touches[0].clientX;
+}
+function move(e) {
+    let dx = e.touches[0].clientX - startX;
+}
+function end(e) {
+    let dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) {
+        if (dx < 0 && currentPage < 1) currentPage++;
+        else if (dx > 0 && currentPage > 0) currentPage--;
+    }
+    document.getElementById('pages').style.transform = `translateX(-${currentPage * 100}vw)`;
+    document.querySelectorAll('.dot').forEach((d, i) => {
+        d.classList.toggle('active', i === currentPage);
+    });
+}
+</script>
 </body>
 </html>
