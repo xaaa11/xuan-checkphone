@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>虚拟男友手机</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+    <style>
+        body {
+            margin: 0;
+            background-color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        .status-bar {
+            height: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 14px;
+            color: #000;
+        }
+        .swiper {
+            width: 100%;
+            height: calc(100vh - 40px);
+        }
+        .swiper-slide {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 10px;
+            box-sizing: border-box;
+        }
+        .app-icon {
+            width: 70px;
+            height: 70px;
+            margin: 15px;
+            text-align: center;
+        }
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 14px;
+        }
+        .app-icon p {
+            margin-top: 6px;
+            font-size: 13px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div>11:27</div>
+        <div>5G 🔋</div>
+    </div>
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="app-icon"><img src="https://img.icons8.com/ios-filled/100/weixing.png"/><p>微信</p></div>
+                <div class="app-icon"><img src="https://img.icons8.com/ios-filled/100/task.png"/><p>备忘录</p></div>
+                <div class="app-icon"><img src="https://img.icons8.com/ios-filled/100/internet.png"/><p>浏览器</p></div>
+                <div class="app-icon"><img src="https://img.icons8.com/ios-filled/100/meal.png"/><p>外卖</p></div>
+                <div class="app-icon"><img src="https://img.icons8.com/ios-filled/100/shopping-cart.png"/><p>购物</p></div>
+            </div>
+            <div class="swiper-slide">
+                <div class="app-icon"><img src="https://img.icons8.com/ios-filled/100/weibo.png"/><p>微博</p></div>
+                <div class="app-icon"><img src="https://img.icons8.com/ios-filled/100/twitterx.png"/><p>X</p></div>
+                <div class="app-icon"><img src="https://img.icons8.com/ios-filled/100/music.png"/><p>音乐</p></div>
+                <div class="app-icon"><img src="https://img.icons8.com/ios-filled/100/bank.png"/><p>银行</p></div>
+                <div class="app-icon"><img src="https://img.icons8.com/ios-filled/100/journal.png"/><p>日记</p></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+            pagination: { el: '.swiper-pagination' },
+        });
+    </script>
+</body>
+</html>
